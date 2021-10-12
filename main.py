@@ -1,5 +1,9 @@
 import unittest
+import time
+
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+
 
 class Login(unittest.TestCase):
     def setUp(self):
@@ -31,5 +35,50 @@ class Login(unittest.TestCase):
         #a los campos username y password le enviamos las siguientes letras
         btn_login = self.driver.find_element_by_id('js-login-submit-btn')
         #ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
+        self.assertTrue(btn_login)
         btn_login.click()
         #clickeamos el boton de login
+    def test_bucle(self):
+        self.test_login()
+        for i in range(20):
+            self.driver.implicitly_wait(8)
+            producto1 = self.driver.find_element_by_xpath(
+                "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
+            producto1.click()
+            self.driver.implicitly_wait(8)
+            seleccionar_cantidad = self.driver.find_element_by_xpath('//div/input')
+            seleccionar_cantidad.send_keys(1)
+            btn_agregarcarrito = self.driver.find_element_by_xpath(
+                '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
+            btn_agregarcarrito.click()
+            self.driver.implicitly_wait(5)
+            btn_agregarpedido = self.driver.find_element_by_xpath("//a[contains(text(),'Confirmar Solicitud')]")
+            btn_agregarpedido.click()
+
+            self.driver.implicitly_wait(5)
+            self.driver.execute_script("window.scrollTo(0,1633)")
+            self.driver.find_element(By.XPATH, "(//input[@id=\'\'])[2]").click()
+            self.driver.find_element(By.ID, "billing_distributor_province").click()
+            dropdown1 = self.driver.find_element(By.ID, "billing_distributor_province")
+            time.sleep(3)
+            dropdown1.find_element(By.XPATH, "//option[. = 'FORMOSA']").click()
+            time.sleep(4)
+            self.driver.find_element(By.ID, "billing_distributor_locality").click()
+            time.sleep(4)
+            dropdown2 = self.driver.find_element(By.ID, "billing_distributor_locality")
+            self.driver.implicitly_wait(4)
+            dropdown2.find_element(By.XPATH, "//option[. = 'FORMOSA']").click()
+            self.driver.find_element(By.XPATH, "//p[@id=\'billing_distributor_field\']/span/select").click()
+            self.driver.implicitly_wait(4)
+            dropdown3 = self.driver.find_element(By.ID, "billing_distributor")
+            self.driver.implicitly_wait(4)
+            dropdown3.find_element(By.XPATH, "//option[. = 'BOVITEC FORMOSA']").click()
+            self.assertTrue(dropdown3, msg="BOVITEC FORMOSA")
+            self.driver.implicitly_wait(5)
+            self.driver.find_element(By.ID, "place_order").click()
+            self.driver.implicitly_wait(5)
+            self.driver.find_element(By.ID, "js-keep-buying").click()
+            print(i)
+
+    def test_compraMobile(self):
+        self.test_login()
