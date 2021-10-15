@@ -18,6 +18,7 @@ class Doctor_selenium_desktop(unittest.TestCase):
         self.driver.maximize_window()
         self.page_index = PageIndex(self.driver)
         self.driver.get('https://doctorpedia:!dp2021!@staging.doctorpedia.com/')
+        #txt
 
     def test_upload(self):
         self.page_index.inicio_sesion()
