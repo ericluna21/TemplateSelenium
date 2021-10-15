@@ -28,7 +28,9 @@ class Login(unittest.TestCase):
         self.driver.implicitly_wait(10)
         #volvemos a esperar
         campo_username = self.driver.find_element_by_id('username')
+        print(campo_username.value_of_css_property('font-family'))
         campo_password = self.driver.find_element_by_id('password')
+        print(campo_password.value_of_css_property('font-family'))
         #ahora creamos variables para hacer referencia a los campos de username y password
         campo_username.send_keys('tester052001@gmail.com')
         campo_password.send_keys('@DK@2iRbJhNNN&eMFRdus%KL')
@@ -78,6 +80,12 @@ class Login(unittest.TestCase):
             self.driver.find_element(By.ID, "place_order").click()
             self.driver.implicitly_wait(5)
             self.driver.find_element(By.ID, "js-keep-buying").click()
+            images = self.driver.find_elements_by_tag_name('img')
+            for img in images:
+                dimensions = img.size
+                width = dimensions['width']
+                height = dimensions['height']
+                print('{}x{}'.format(width, height))
             print(i)
 
     def test_compraMobile(self):
