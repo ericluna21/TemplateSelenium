@@ -3,7 +3,7 @@ import time
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def test_setUp():
@@ -11,7 +11,7 @@ def test_setUp():
 
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome('chromedriver.exe', options=chrome_options)
+    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
     driver.maximize_window()
     #definimos que necesitamos iniciar el webdriver de chrome y le ponemos la direccion donde se encuentra
     url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
