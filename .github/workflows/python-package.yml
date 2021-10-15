@@ -40,6 +40,5 @@ jobs:
       run: |
         sudo apt install google-chrome-stable
         sudo apt-get install firefox
-    - name: Test with pytest
-        run: |
-          pytest
+    - name: Run tests with pytest
+        run: pytest
