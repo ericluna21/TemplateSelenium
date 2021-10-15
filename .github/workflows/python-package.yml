@@ -40,7 +40,4 @@ jobs:
       run: |
         sudo apt install google-chrome-stable
         sudo apt-get install firefox
-    - name: unitterst
-      run: |
-        echo "def test_upload(self): pass" > Demo_Selenium_Desktop.py
-        pytest Demo_Selenium_Desktop.py
+
