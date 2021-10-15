@@ -41,9 +41,6 @@ jobs:
       run: |
         sudo apt install google-chrome-stable
         sudo apt-get install firefox
-    - name: Prepare Selenium
-        # https://github.com/marketplace/actions/setup-chromedriver
-        uses: nanasess/setup-chromedriver@master
     - name: Launch browser
     - name: Start XVFB
       run: |
