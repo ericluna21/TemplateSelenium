@@ -1,5 +1,5 @@
 import time
-import unittest
+import pytest
 import HtmlTestRunner
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from Pages.PageIndex import *
 
 
-class Doctor_selenium_desktop(unittest.TestCase):
+class Doctor_selenium_desktop(pytest):
     def setUp(self):
         self.driver = webdriver.Chrome('chromedriver.exe')
         self.driver.maximize_window()
