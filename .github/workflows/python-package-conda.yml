@@ -1,4 +1,3 @@
-
 name: Python Package using Conda
 
 on: [push]
@@ -32,18 +31,4 @@ jobs:
     - name: Test with pytest
       run: |
         conda install unittest2
- 
-    - name: 'Prepare Selenium'
-     # https://github.com/marketplace/actions/setup-chromedriver
-      uses: nanasess/setup-chromedriver@master
-    - name: Launch browser
-    - name: Start XVFB
-      run: |
-        google-chrome --version
-        export DISPLAY=:99
-        chromedriver --url-base=/wd/hub &
-         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional, disables headless mode
-    - name: Run tests
-      run: run python Demo_Selenium_Headless.py
-      env:
-          DISPLAY: :99
+        unittest
