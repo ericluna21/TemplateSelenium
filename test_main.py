@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 
 def test_setUp():
     "lo primero que tenemos que hacer es crear nuestra situacion initial"
-    driver = webdriver.Chrome('chromedriver.exe')
+    driver = webdriver.Chrome()
     driver.maximize_window()
     #definimos que necesitamos iniciar el webdriver de chrome y le ponemos la direccion donde se encuentra
     url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
