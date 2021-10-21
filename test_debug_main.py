@@ -9,7 +9,9 @@ class Test_Biogenesis():
     def teardown_method(self, method):
         self.driver.quit()
     def setup_method(self, method):
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
         self.driver.maximize_window()
         url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
         "definimos en una variable nuestra url"
