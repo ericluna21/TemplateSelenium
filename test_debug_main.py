@@ -50,6 +50,7 @@ class Test_Biogenesis():
 
             self.driver.implicitly_wait(5)
             self.driver.execute_script("window.scrollTo(0,1633)")
+            self.driver.implicitly_wait(5)
             self.driver.find_element(By.XPATH, "(//input[@id=\'\'])[2]").click()
             provinciaDropdown = Select(self.driver.find_element_by_name("billing_distributor_province"))
             provinciaDropdown.select_by_visible_text("FORMOSA")
