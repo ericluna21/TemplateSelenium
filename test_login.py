@@ -1,18 +1,18 @@
-import unittest
+import pytest
 import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-class Login(unittest.TestCase):
- def setUp(self):
-  "lo primero que tenemos que hacer es crear nuestra situacion initial"
-  self.mobile_emulation = {"deviceName": "iPhone X"}
-  #Con esto definimos si queremos usar un mobile
-  self.chrome_options = webdriver.ChromeOptions()
+class Test_Login():
 
-  self.chrome_options.add_experimental_option("mobileEmulation", self.mobile_emulation)
-  self.driver = webdriver.Chrome('chromedriver.exe',options=self.chrome_options)
+ def test_bucle(self):
+  "lo primero que tenemos que hacer es crear nuestra situacion initial"
+  # self.mobile_emulation = {"deviceName": "iPhone X"}
+  # Con esto definimos si queremos usar un mobile
+  # self.chrome_options = webdriver.ChromeOptions()
+
+  # self.chrome_options.add_experimental_option("mobileEmulation", self.mobile_emulation)
+  self.driver = webdriver.Chrome('chromedriver.exe')
   self.driver.maximize_window()
   # definimos que necesitamos iniciar el webdriver de chrome y le ponemos la direccion donde se encuentra
   url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
@@ -20,7 +20,8 @@ class Login(unittest.TestCase):
   self.driver.get(url)
   # hay que leer esto como si fuera una historia por ejemplo self.driver.get(url), podemos decir que es
   # situacion inicial, en el driver, le damos la siguiente url
- def test_mobile(self):
+
+
   # ahora vamos a logearnos
   self.driver.implicitly_wait(10)
   # implicity wait es un temporizador, pone en pausa por asi decirlo al webdriver hasta que encuentra la siguiente
@@ -31,20 +32,20 @@ class Login(unittest.TestCase):
   # a nuestro boton ingresar lo clickeamos
   self.driver.implicitly_wait(10)
   # volvemos a esperar
-  campo_username = self.driver.find_element_by_id('username')
+  txtbox_username = self.driver.find_element_by_id('username')
   campo_password = self.driver.find_element_by_id('password')
   # ahora creamos variables para hacer referencia a los campos de username y password
-  campo_username.send_keys('tester052001@gmail.com')
+  txtbox_username.send_keys('tester052001@gmail.com')
   campo_password.send_keys('@DK@2iRbJhNNN&eMFRdus%KL')
   # a los campos username y password le enviamos las siguientes letras
   btn_login = self.driver.find_element_by_id('js-login-submit-btn')
   # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
   self.assertTrue(btn_login)
   btn_login.click()
-  time.sleep(20)
 
- def test_bucle(self):
-  self.test_mobile()
+
+
+
   for i in range(20):
    self.driver.implicitly_wait(8)
    producto1 = self.driver.find_element_by_xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/main[1]/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
@@ -81,4 +82,3 @@ class Login(unittest.TestCase):
    self.driver.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[3]/main[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[2]/button[2]").click()
    self.driver.implicitly_wait(15)
    self.driver.find_element(By.ID, "js-keep-buying").click()
-   print(i)
