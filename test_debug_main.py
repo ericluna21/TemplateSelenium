@@ -33,7 +33,7 @@ class Test_Biogenesis():
         # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
 
         btn_login.click()
-        for i in range (20):
+        for i in range (5):
             self.driver.implicitly_wait(8)
             producto1 = self.driver.find_element_by_xpath(
             "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
