@@ -9,31 +9,28 @@ class Test_Biogenesis():
     def teardown_method(self, method):
         self.driver.quit()
     def setup_method(self, method):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+        #chrome_options = Options()
+        #chrome_options.add_argument("--headless")
+        #self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+        self.driver = webdriver.Chrome("chromedriver.exe")
         self.driver.maximize_window()
         url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
         "definimos en una variable nuestra url"
         self.driver.get(url)
     def test_setUp(self):
-        btn_ingresar = self.driver.find_element_by_id('menu-item-632')
-        # creamos una variable que es un boton y le decimos donde encontrarlo.
+        btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
         btn_ingresar.click()
-        # a nuestro boton ingresar lo clickeamos
         self.driver.implicitly_wait(10)
-        # volvemos a esperar
         campo_username = self.driver.find_element_by_id('username')
         campo_password = self.driver.find_element_by_id('password')
-        # ahora creamos variables para hacer referencia a los campos de username y password
         campo_username.send_keys('tester052001@gmail.com')
         campo_password.send_keys('@DK@2iRbJhNNN&eMFRdus%KL')
-        # a los campos username y password le enviamos las siguientes letras
+
         btn_login = self.driver.find_element_by_id('js-login-submit-btn')
         # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
 
         btn_login.click()
-        for i in range (5):
+        for i in range (1):
             self.driver.implicitly_wait(8)
             producto1 = self.driver.find_element_by_xpath(
             "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
@@ -44,6 +41,21 @@ class Test_Biogenesis():
             btn_agregarcarrito = self.driver.find_element_by_xpath(
             '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
             btn_agregarcarrito.click()
+            btn_seguircomprando = self.driver.find_element(By.LINK_TEXT, "Continuar viendo productos")
+            btn_seguircomprando.click()
+            self.driver.implicitly_wait(8)
+            producto2 = self.driver.find_element(By.XPATH,
+                                                 "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[1]/div[1]/div[1]/div[2]/div[5]/a[1]")
+            producto2.click()
+            self.driver.implicitly_wait(8)
+            seleccionar_cantidad2 = self.driver.find_element(By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[1]/input[1]")
+            seleccionar_cantidad2.send_keys(1)
+            btn_agregarcarrito2 = self.driver.find_element(By.XPATH,
+                                                           "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]")
+            btn_agregarcarrito2.click()
+            btn_confirmarmaxlimite = self.driver.find_element(By.XPATH, "//body/div[@id='page']/div[@id='content']/div[3]/div[1]/main[1]/div[2]/div[1]/div[3]/div[1]/div[4]/button[1]")
+            btn_confirmarmaxlimite.click()
+            btn_agregarcarrito2.click()
             self.driver.implicitly_wait(5)
             btn_agregarpedido = self.driver.find_element_by_xpath("//a[contains(text(),'Confirmar Solicitud')]")
             btn_agregarpedido.click()
