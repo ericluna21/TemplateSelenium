@@ -40,7 +40,7 @@ class Test_Biogenesis():
             btn_agregarcarrito = self.driver.find_element_by_xpath(
             '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
             btn_agregarcarrito.click()
-            btn_seguircomprando = self.driver.find_element(By.LINK_TEXT, "Continuar viendo productos")
+            btn_seguircomprando = self.driver.find_element(By.LINK_TEXT, "Agregar productos")
             btn_seguircomprando.click()
             self.driver.implicitly_wait(8)
             producto2 = self.driver.find_element(By.XPATH,
