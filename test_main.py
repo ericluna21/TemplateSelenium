@@ -9,9 +9,8 @@ class Test_Biogenesis():
     def teardown_method(self, method):
         self.driver.quit()
     def setup_method(self, method):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
+
+        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
         self.driver.maximize_window()
         # driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
         # definimos que necesitamos iniciar el webdriver de chrome y le ponemos la direccion donde se encuentra
@@ -19,24 +18,8 @@ class Test_Biogenesis():
         "definimos en una variable nuestra url"
         self.driver.get(url)
     def test_setUp(self):
-        # lo primero que tenemos que hacer es crear nuestra situacion initial
 
-        #chrome_options = Options()
-        #chrome_options.add_argument("--headless")
-        #self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
-        #self.driver.maximize_window()
-        # driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-        # definimos que necesitamos iniciar el webdriver de chrome y le ponemos la direccion donde se encuentra
-        #url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
-        "definimos en una variable nuestra url"
-        #self.driver.get(url)
-        # hay que leer esto como si fuera una historia por ejemplo self.driver.get(url), podemos decir que es
-        # situacion inicial, en el driver, le damos la siguiente url
-        # ahora vamos a logearnos
-        # implicity wait es un temporizador, pone en pausa por asi decirlo al webdriver hasta que encuentra la siguiente
-        # linea, esto nos sirve para cuando cargamos una pag y necesitamos esperar cierto tiempo a que termine de cargar
         btn_ingresar = self.driver.find_element_by_id('menu-item-632')
-        # creamos una variable que es un boton y le decimos donde encontrarlo.
         btn_ingresar.click()
         # a nuestro boton ingresar lo clickeamos
         self.driver.implicitly_wait(10)
@@ -51,43 +34,39 @@ class Test_Biogenesis():
         # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
 
         btn_login.click()
-        self.driver.implicitly_wait(8)
-        producto1 = self.driver.find_element_by_xpath(
-            "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
-        producto1.click()
-        self.driver.implicitly_wait(8)
-        seleccionar_cantidad = self.driver.find_element_by_xpath('//div/input')
-        seleccionar_cantidad.send_keys(1)
-        btn_agregarcarrito = self.driver.find_element_by_xpath(
-            '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
-        btn_agregarcarrito.click()
-        self.driver.implicitly_wait(5)
-        btn_agregarpedido = self.driver.find_element_by_xpath("//a[contains(text(),'Confirmar Solicitud')]")
-        btn_agregarpedido.click()
+        for i in range (10):
+            self.driver.implicitly_wait(8)
+            producto1 = self.driver.find_element_by_xpath(
+                "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
+            producto1.click()
+            self.driver.implicitly_wait(8)
+            seleccionar_cantidad = self.driver.find_element_by_xpath('//div/input')
+            seleccionar_cantidad.send_keys(1)
+            btn_agregarcarrito = self.driver.find_element_by_xpath(
+                '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
+            btn_agregarcarrito.click()
+            self.driver.implicitly_wait(5)
+            btn_agregarpedido = self.driver.find_element_by_xpath("//a[contains(text(),'Confirmar Solicitud')]")
+            btn_agregarpedido.click()
 
-        self.driver.implicitly_wait(5)
-        self.driver.execute_script("window.scrollTo(0,1633)")
-        self.driver.find_element(By.XPATH, "(//input[@id=\'\'])[2]").click()
-        provinciaDropdown = Select(self.driver.find_element_by_name("billing_distributor_province"))
-        provinciaDropdown.select_by_visible_text("FORMOSA")
-        self.driver.implicitly_wait(5)
-        ciudadDropdown = Select(self.driver.find_element_by_name("billing_distributor_locality"))
-        ciudadDropdown.select_by_visible_text("FORMOSA")
-        self.driver.implicitly_wait(5)
-        veterinariaDropdown = Select(self.driver.find_element_by_name("billing_distributor"))
-        veterinariaDropdown.select_by_visible_text("BOVITEC FORMOSA")
-        time.sleep(4)
-        self.driver.find_element(By.ID, "place_order").click()
-        self.driver.implicitly_wait(5)
-        self.driver.find_element(By.ID, "js-keep-buying").click()
-        print("La compra fue correcta")
+            self.driver.implicitly_wait(5)
+            self.driver.execute_script("window.scrollTo(0,1633)")
+            self.driver.find_element(By.XPATH, "(//input[@id=\'\'])[2]").click()
+            provinciaDropdown = Select(self.driver.find_element_by_name("billing_distributor_province"))
+            provinciaDropdown.select_by_visible_text("BUENOS AIRES")
+            self.driver.implicitly_wait(5)
+            ciudadDropdown = Select(self.driver.find_element_by_name("billing_distributor_locality"))
+            ciudadDropdown.select_by_visible_text("LAPRIDA")
+            self.driver.implicitly_wait(5)
+            veterinariaDropdown = Select(self.driver.find_element_by_name("billing_distributor"))
+            veterinariaDropdown.select_by_visible_text("BAYA CASAL SUCURSAL LAPRIDA")
+            time.sleep(4)
+            self.driver.find_element(By.ID, "place_order").click()
+            time.sleep(4)
+            self.driver.find_element(By.ID, "js-correct-details").click()
+            self.driver.implicitly_wait(10)
+            self.driver.find_element(By.ID,"js-keep-buying").click()
+            print("La compra fue correcta")
         self.driver.close()
-        # images = self.driver.find_elements_by_tag_name('img')
-        # for img in images:
-        # dimensions = img.size
-        # width = dimensions['width']
-        # height = dimensions['height']
-        # print('{}x{}'.format(width, height))
-        # print(i)"
 
 
