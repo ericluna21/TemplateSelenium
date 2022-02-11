@@ -21,24 +21,24 @@ class Test_Biogenesis():
         btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
         btn_ingresar.click()
         self.driver.implicitly_wait(10)
-        campo_username = self.driver.find_element_by_id('username')
-        campo_password = self.driver.find_element_by_id('password')
+        campo_username = self.driver.find_element(By.ID, 'username')
+        campo_password = self.driver.find_element(By.ID, 'password')
         campo_username.send_keys('tester052001@gmail.com')
         campo_password.send_keys('@DK@2iRbJhNNN&eMFRdus%KL')
 
-        btn_login = self.driver.find_element_by_id('js-login-submit-btn')
+        btn_login = self.driver.find_element(By.ID, 'js-login-submit-btn')
         # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
 
         btn_login.click()
         for i in range (1):
             self.driver.implicitly_wait(8)
-            producto1 = self.driver.find_element_by_xpath(
+            producto1 = self.driver.find_element(By.XPATH,
             "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
             producto1.click()
             self.driver.implicitly_wait(8)
-            seleccionar_cantidad = self.driver.find_element_by_xpath('//div/input')
+            seleccionar_cantidad = self.driver.find_element(By.XPATH,'//div/input')
             seleccionar_cantidad.send_keys(1)
-            btn_agregarcarrito = self.driver.find_element_by_xpath(
+            btn_agregarcarrito = self.driver.find_element(By.XPATH,
             '/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/main[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[3]/button[1]')
             btn_agregarcarrito.click()
             btn_seguircomprando = self.driver.find_element(By.LINK_TEXT, "Agregar productos")
@@ -57,20 +57,20 @@ class Test_Biogenesis():
             btn_confirmarmaxlimite.click()
             btn_agregarcarrito2.click()
             self.driver.implicitly_wait(5)
-            btn_agregarpedido = self.driver.find_element_by_xpath("//a[contains(text(),'Confirmar Solicitud')]")
+            btn_agregarpedido = self.driver.find_element(By.XPATH,"//a[contains(text(),'Confirmar Solicitud')]")
             btn_agregarpedido.click()
 
             self.driver.implicitly_wait(5)
             self.driver.execute_script("window.scrollTo(0,1633)")
             self.driver.implicitly_wait(5)
             self.driver.find_element(By.XPATH, "(//input[@id=\'\'])[2]").click()
-            provinciaDropdown = Select(self.driver.find_element_by_name("billing_distributor_province"))
+            provinciaDropdown = Select(self.driver.find_element(By.NAME, "billing_distributor_province"))
             provinciaDropdown.select_by_visible_text("FORMOSA")
             self.driver.implicitly_wait(5)
-            ciudadDropdown = Select(self.driver.find_element_by_name("billing_distributor_locality"))
+            ciudadDropdown = Select(self.driver.find_element(By.NAME, "billing_distributor_locality"))
             ciudadDropdown.select_by_visible_text("FORMOSA")
             self.driver.implicitly_wait(5)
-            veterinariaDropdown = Select(self.driver.find_element_by_name("billing_distributor"))
+            veterinariaDropdown = Select(self.driver.find_element(By.NAME, "billing_distributor"))
             veterinariaDropdown.select_by_visible_text("BOVITEC FORMOSA")
             time.sleep(4)
             self.driver.find_element(By.ID, "place_order").click()
