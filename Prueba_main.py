@@ -34,7 +34,7 @@ class Test_Biogenesis():
         # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
 
         btn_login.click()
-        for i in range(5):
+        for i in range(2):
             self.driver.implicitly_wait(8)
             producto1 = self.driver.find_element_by_xpath(
                 "//body/div[@id='page']/div[@id='content']/div[@id='primary']/main[@id='main']/section[2]/div[1]/div[2]/div[1]/div[5]/a[1]")
@@ -89,10 +89,10 @@ class Test_Biogenesis():
             provinciaDropdown.select_by_visible_text("BUENOS AIRES")
             self.driver.implicitly_wait(5)
             ciudadDropdown = Select(self.driver.find_element_by_name("billing_distributor_locality"))
-            ciudadDropdown.select_by_visible_text("30 DE AGOSTO")
+            ciudadDropdown.select_by_visible_text("9 DE JULIO")
             self.driver.implicitly_wait(5)
             veterinariaDropdown = Select(self.driver.find_element_by_name("billing_distributor"))
-            veterinariaDropdown.select_by_visible_text("CAMPO Y ASOCIADOS SUCURSAL 30 DE AGOSTO")
+            veterinariaDropdown.select_by_visible_text("TECNOVET SRL SUCURSAL 9 DE JULIO")
             time.sleep(4)
             self.driver.find_element(By.ID, "place_order").click()
             time.sleep(4)
