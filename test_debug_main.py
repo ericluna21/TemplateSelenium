@@ -17,7 +17,7 @@ class Test_Biogenesis():
         url = 'https://biodevel:b8eda32d@biodevel.wpengine.com/'
         "definimos en una variable nuestra url"
         self.driver.get(url)
-    def test_setUp(self):
+    def test2_setUp(self):
         btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
         btn_ingresar.click()
         self.driver.implicitly_wait(10)

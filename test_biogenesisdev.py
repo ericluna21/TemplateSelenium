@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 df = pd.read_excel('Libro1.xlsx', sheet_name='Hoja1',  header=None)
-
 class Test_BiogenesisDEV():
     def teardown_method(self, method):
         self.driver.quit()
@@ -21,8 +20,8 @@ class Test_BiogenesisDEV():
         self.driver.get(url)
     def test_setUp(self):
         for i in range(20):
-            self.driver.implicitly_wait(8)
             matriz_listas = df.loc[i].values.tolist()
+            self.driver.implicitly_wait(8)
             btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
             btn_ingresar.click()
             self.driver.implicitly_wait(10)
