@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 
-class Test_Biogenesis():
+class Biogenesis():
     def teardown_method(self, method):
         self.driver.quit()
     def setup_method(self, method):

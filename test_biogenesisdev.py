@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 df = pd.read_excel('Libro1.xlsx', sheet_name='Hoja1',  header=None)
-class Test_BiogenesisDEV():    
+class Test_BiogenesisDEV():
     def test_setUp(self):
         chrome_options = Options()
         chrome_options.add_argument('--headless')
@@ -20,22 +20,30 @@ class Test_BiogenesisDEV():
         self.driver.get(url)
         for i in range(20):
             matriz_listas = df.loc[i].values.tolist()
-            btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
-            btn_ingresar.click()
+            try:
+                time.sleep(4)
+                btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
+                btn_ingresar.click()
+            except:
+                time.sleep(4)
+                btn_ingresar = self.driver.find_element(By.CSS_SELECTOR, ".menu-item-632")
+                btn_ingresar.click()
             self.driver.implicitly_wait(10)
             campo_username = self.driver.find_element(By.ID, 'username')
             campo_password = self.driver.find_element(By.ID, 'password')
             campo_username.send_keys(matriz_listas)
             campo_password.send_keys('test')
-
             btn_login = self.driver.find_element(By.ID, 'js-login-submit-btn')
             # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
-
             btn_login.click()
-            for i in range(1):
-                self.driver.implicitly_wait(8)
-                producto1 = self.driver.find_element(By.LINK_TEXT, "Ver Detalle")
-                producto1.click()
+            for i in range(2):
+                try:
+                    self.driver.implicitly_wait(8)
+                    producto1 = self.driver.find_element(By.LINK_TEXT, "Ver Detalle")
+                    producto1.click()
+                except:
+                    self.driver.implicitly_wait(8)
+                    self.driver.find_element(By.XPATH, '//*[@id="main"]/section[2]/div/div[2]/div/div[5]/a').click()
                 self.driver.implicitly_wait(8)
                 seleccionar_cantidad = self.driver.find_element(By.XPATH, '//div/input')
                 seleccionar_cantidad.send_keys(1)
@@ -61,6 +69,7 @@ class Test_BiogenesisDEV():
                 self.driver.implicitly_wait(10)
                 self.driver.find_element(By.ID, "js-keep-buying").click()
                 print("La compra fue correcta")
+                time.sleep(4)
             for i in range(1):
                 self.driver.implicitly_wait(8)
                 try:
@@ -112,8 +121,10 @@ class Test_BiogenesisDEV():
                     self.driver.find_element(By.LINK_TEXT, "Mi Perfil").click()
                     self.driver.implicitly_wait(10)
                     self.driver.find_element(By.LINK_TEXT, "Cerrar Sesión").click()
+                    time.sleep(4)
                 except:
                     self.driver.find_element(By.LINK_TEXT, "Mi Perfil").click()
                     self.driver.implicitly_wait(10)
                     self.driver.find_element(By.LINK_TEXT, "Cerrar Sesión").click()
+                    time.sleep(4)
             self.driver.close()
