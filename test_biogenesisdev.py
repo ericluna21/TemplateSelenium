@@ -36,7 +36,7 @@ class Test_BiogenesisDEV():
             btn_login = self.driver.find_element(By.ID, 'js-login-submit-btn')
             # ahora con los campos llenos necesitamos logearnos, asi que hacemos referencia al boton de login
             btn_login.click()
-            for i in range(2):
+            for y in range(2):
                 try:
                     self.driver.implicitly_wait(8)
                     producto1 = self.driver.find_element(By.LINK_TEXT, "Ver Detalle")
