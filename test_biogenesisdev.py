@@ -45,8 +45,6 @@ class Test_BiogenesisDEV():
                     self.driver.implicitly_wait(8)
                     self.driver.find_element(By.XPATH, '//*[@id="main"]/section[2]/div/div[2]/div/div[5]/a').click()
                 self.driver.implicitly_wait(8)
-                seleccionar_cantidad = self.driver.find_element(By.XPATH, '//div/input')
-                seleccionar_cantidad.send_keys(1)
                 self.driver.find_element(By.CSS_SELECTOR, ".single_add_to_cart_button").click()
                 self.driver.implicitly_wait(8)
                 self.driver.find_element(By.LINK_TEXT, "Confirmar Solicitud").click()
