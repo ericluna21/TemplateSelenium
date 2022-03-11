@@ -22,7 +22,7 @@ class Test_BiogenesisDEV():
             matriz_listas = df.loc[i].values.tolist()
             try:
                 time.sleep(4)
-                self.driver.find_element(By.ID, "js-close-new-campaign")
+                self.driver.find_element(By.ID, "js-close-new-campaign").click()
                 btn_ingresar = self.driver.find_element(By.LINK_TEXT, "Ingresar")
                 btn_ingresar.click()
             except:
