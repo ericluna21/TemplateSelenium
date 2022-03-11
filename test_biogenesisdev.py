@@ -44,7 +44,7 @@ class Test_BiogenesisDEV():
                     producto1.click()
                 except:
                     self.driver.implicitly_wait(8)
-                    self.driver.find_element(By.XPATH, '//*[@id="main"]/section[2]/div/div[2]/div/div[5]/a').click()
+                    self.driver.find_element(By.XPATH, '//*[@id="main"]/section[2]/div/div[2]/div[1]/div[5]/a').click()
                 self.driver.implicitly_wait(8)
                 seleccionar_cantidad = self.driver.find_element(By.XPATH, '//div/input')
                 seleccionar_cantidad.send_keys(1)
